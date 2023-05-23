@@ -28,9 +28,10 @@ public class JokeVerticle extends AbstractVerticle {
   private void fetchJoke() {
     request.send()
     .onSuccess(result -> {
-      System.out.println(result.body().getString("joke")); // <7>
+      JsonObject body = result.body();
+      System.out.println("JSON: " + body);
+      System.out.println(body.getString("joke")); // <7>
       System.out.println("🤣");
-      System.out.println();
     })
     .onFailure(e -> System.out.println("No joke fetched: " + e.getMessage()));
   }
